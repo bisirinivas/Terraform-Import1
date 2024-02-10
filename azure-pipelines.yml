@@ -26,8 +26,7 @@ stages:
         backendAzureRmResourceGroupName: 'Centric_Rg'
         backendAzureRmStorageAccountName: 'terraformsto'
         backendAzureRmContainerName: 'tfstatecontainer'
-        backendAzureRmKey: 'prod.terraform.tfstat'
-        backendAWSBucketName: 
+        backendAzureRmKey: 'prod.terraform.tfstat' 
     - task: TerraformTaskV4@4
       displayName: tf validate
       inputs:
