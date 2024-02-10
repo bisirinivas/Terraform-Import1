@@ -33,6 +33,8 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'validate'
+stages:
+- stage: tf deploy    
     - task: TerraformTaskV4@4
       displayName: tf apply
       inputs:
