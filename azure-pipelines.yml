@@ -9,15 +9,35 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables: 
-rgname = 'tfl'
-location 'uk south'
+variables:
+  rgname: 'tfl'
+  location: 'uk south'
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: TerraformTaskV4@4
+      displayName: Tf plan
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'Azure subscription 1(d43bf02c-6207-4c24-9577-60574e4466d4)'
+        backendAzureRmResourceGroupName: 'Centric_Rg'
+        backendAzureRmStorageAccountName: 'terraformsto'
+        backendAzureRmContainerName: 'tfstatecontainer'
+        backendAzureRmKey: 'prod.terraform.tfstat'
+        backendAWSBucketName: 
+    - task: TerraformTaskV4@4
+      displayName: tf validate
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+    - task: TerraformTaskV4@4
+      displayName: tf apply
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        commandOptions: '-auto-approve'
+        environmentServiceNameAzureRM: 'Azure subscription 1(d43bf02c-6207-4c24-9577-60574e4466d4)'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
