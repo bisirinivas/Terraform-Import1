@@ -11,7 +11,7 @@ pool:
 
 variables:
   rgname: 'tfl'
-  location: 'uk south'
+  location: 'UK South'
 stages:
 - stage: Build
   jobs:
