@@ -76,10 +76,8 @@ resource "azurerm_linux_virtual_machine" "vm1" {
   name                  = var.vmname
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
-  size                = "Standard_F2"
-  network_interface_ids = [
-    azurerm_network_interface.nic1.id,
-  ]
+  size                  = "Standard_F2"
+  network_interface_ids = [azurerm_network_interface.nic1.id]
 
   os_disk {
     caching              = "ReadWrite"
@@ -91,8 +89,8 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     offer     = "WindowsServer"
     sku       = "2016-Datacenter"
     version   = "latest"
+  }
 
-computer_name                   = azurerm_linux_virtual_machine.vm1
   admin_username                  = "secureadmin"
   disable_password_authentication = true
 
@@ -101,6 +99,3 @@ computer_name                   = azurerm_linux_virtual_machine.vm1
     public_key = tls_private_key.secureadmin_ssh.public_key_openssh
   }
 }
-
-
-  }
