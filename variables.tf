@@ -22,24 +22,21 @@ variable "vnname" {
 
 }
 
-variable "subnet1" {
+variable "subnet" {
 
   type        = string
   description = "subnet name"
 
 }
 
-variable "nsg1" {
-
-  type = string
-
-  description = "nsg name"
-
-
+variable "nsg" {
+  description = "Description of the nsg1 variable"
+  type        = string
 }
 
 
-variable "nic1" {
+
+variable "nic" {
   
 type = string
 
@@ -47,7 +44,7 @@ description = "nic name"
 
 }
 
-variable "vm1" {
+variable "vmname" {
 
   type = string
 
