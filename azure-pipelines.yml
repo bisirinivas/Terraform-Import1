@@ -6,8 +6,6 @@
 trigger:
 - main
 
-schedules:
-- cron: "*/5* * * *"
 
 pool:
   vmImage: ubuntu-latest
