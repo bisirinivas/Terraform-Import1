@@ -30,7 +30,13 @@ variable "subnet_name" {
 }
 
 
+variable "nsg_name" {
 
+  type =string
+
+  description = "nsg name"
+  
+}
 
 variable "nic_name" {
   
