@@ -40,23 +40,20 @@ variable "nsg1" {
 
 
 variable "nic1" {
+  
+type = string
 
-  type = string
-
-  description = "nic name"
-}
-
-variable "" {
+description = "nic name"
 
 }
 
-variable "vmname" {
+variable "vm1" {
 
   type = string
 
 
   description = "vm name"
-
+  
 }
 
 
