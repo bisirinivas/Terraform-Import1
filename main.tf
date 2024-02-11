@@ -16,7 +16,7 @@ location = "UK South"
 resource "azurerm_virtual_network" "vm1" {
     name = var.vnname
     resource_group_name = azurerm_resource_group.rg.name
-    location = var.azurerm_resource_group.location
+    location = azurerm_resource_group.location
     address_space = [ "10.0.0.0/16" ]
   
 }
@@ -34,7 +34,7 @@ resource "azurerm_network_security_group" "nsg1" {
     name = var.nsg
     resource_group_name = azurerm_resource_group.rg.name
     location = azurerm_resource_group.rg.location
-    
+
     security_rule {
 
 
