@@ -1,2 +1,7 @@
-rgname = "Tfl"
+rgname   = "Tfl"
 location = "UK South"
+vnname = "vnet1"
+subnet1 = "frontdoor"
+nsg1 = "frontdoornsg"
+nic1 = "frontdoornic"
+vm1 = "myapplication"
