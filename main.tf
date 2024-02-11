@@ -66,14 +66,17 @@ resource "azurerm_network_interface_security_group_association" "nicinterface" {
     network_security_group_id = azurerm_network_security_group.nsg1.id
 }
 
+
+resource "tls_private_key" "secureadmin_ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "azurerm_linux_virtual_machine" "vm1" {
   name                  = var.vmname
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
   size                = "Standard_F2"
-  admin_username      = "adminuser"
-  disable_password_authentication = false
-  admin_password      = "P@$$w0rd1234!"
   network_interface_ids = [
     azurerm_network_interface.nic1.id,
   ]
@@ -88,5 +91,16 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     offer     = "WindowsServer"
     sku       = "2016-Datacenter"
     version   = "latest"
+
+computer_name                   = azurerm_linux_virtual_machine.vm1
+  admin_username                  = "secureadmin"
+  disable_password_authentication = true
+
+  admin_ssh_key {
+    username   = "secureadmin"
+    public_key = tls_private_key.secureadmin_ssh.public_key_openssh
   }
 }
+
+
+  }
