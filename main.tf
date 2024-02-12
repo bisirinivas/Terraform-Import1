@@ -99,3 +99,58 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     public_key = tls_private_key.secureadmin_ssh.public_key_openssh
   }
 }
+
+
+
+data "azurerm_key_vault" "keyv" {
+  name                = "myterraformkeys"
+  resource_group_name = azurerm_resource_group.rg.name
+}  
+
+
+data "azurerm_key_vault_secret" "keyvalutsecret" {
+  name         = "admin"
+  key_vault_id = data.azurerm_key_vault.keyv.id
+}
+
+resource "azurerm_network_interface" "nic2" {
+    name                = var.nic_name1
+    location            = azurerm_resource_group.rg.location
+    resource_group_name = azurerm_resource_group.rg.name
+
+    ip_configuration {
+        name                          = "nic-configuration"
+        subnet_id                     = azurerm_subnet.subnet1.id
+        private_ip_address_allocation = "Dynamic"
+    }
+}
+
+resource "azurerm_network_interface_security_group_association" "nicinterface1" {
+    network_interface_id      = azurerm_network_interface.nic2.id
+    network_security_group_id = azurerm_network_security_group.nsg1.id
+}
+
+
+resource "azurerm_windows_virtual_machine" "vm2" {
+  name                = var.vmname1
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  size                = "Standard_F2"
+  admin_username      = "adminuser"
+  admin_password         = data.azurerm_key_vault_secret.keyvalutsecret.value
+  network_interface_ids = [
+  azurerm_network_interface.nic2.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+}
