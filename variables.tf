@@ -56,3 +56,21 @@ variable "vmname" {
 }
 
 
+variable "nic_name1" {
+  
+
+type = string
+
+description = "nic name1"
+}
+
+
+variable "vmname1" {
+
+  type = string
+
+
+  description = "new vm"
+  
+
+}
