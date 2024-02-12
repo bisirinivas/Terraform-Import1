@@ -109,7 +109,7 @@ data "azurerm_key_vault" "keyv" {
 
 
 data "azurerm_key_vault_secret" "keyvalutsecret" {
-  name         = "admin"
+  name         = "admin1"
   key_vault_id = data.azurerm_key_vault.keyv.id
 }
 
