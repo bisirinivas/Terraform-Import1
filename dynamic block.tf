@@ -1,4 +1,4 @@
-
+https://medium.com/@amjad30nagori/what-is-dynamic-block-in-terraform-a-step-by-step-guide-b56b706edd47
 variable "network_subnets" {
 
   type = map(string)
