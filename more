@@ -1,0 +1,28 @@
+variables:
+      system.debug: true
+
+use like the below
+
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    variables:
+      system.debug: true
+    steps:
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'Azure subscription 1(d43bf02c-6207-4c24-9577-60574e4466d4)'
+        backendAzureRmResourceGroupName: 'Centric_Rg'
+        backendAzureRmStorageAccountName: 'terraformsto'
+        backendAzureRmContainerName: 'tfstatecontainer'
+        backendAzureRmKey: 'prod.terraform.tfstat'
