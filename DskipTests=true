@@ -1,0 +1,13 @@
+DskipTests=true
+
+The package-DskipTests=true (or package -DskipTest=true in some cases) is a Maven command-line option used during the build process of a Java project. Maven is a build automation and project management tool.
+
+When you include this option, it skips the execution of tests during the packaging phase of your project. This can be useful in scenarios where you want to quickly build your project without running tests, perhaps for a quick deployment or to save time during development.
+
+Here's a breakdown of the command:
+
+package: This is a Maven goal that is used to compile your code, run tests, and package your application (e.g., into a JAR or WAR file).
+
+-DskipTests=true: This is a system property that is set to "true." The "skipTests" property is a common convention in Maven to skip the execution of tests. By setting it to "true," you're telling Maven to skip running the tests during the build.
+
+So, when you use package -DskipTests=true, Maven will go through the compilation and packaging phases but will skip the execution of tests. It's essential to note that skipping tests might not be suitable in all situations, especially in a production environment where thorough testing is crucial. It's often used in development or specific build scenarios where running tests is not necessary.
