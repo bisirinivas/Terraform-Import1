@@ -55,3 +55,8 @@ Testing agent connection.
 Enter work folder (press enter for _work) > 
 2024-03-01 10:46:43Z: Settings Saved.
 azureuser@devopsagnet:~/myagent$ 
+./run.sh
+Scanning for tool capabilities.
+Connecting to the server.
+2024-03-01 10:50:28Z: Listening for Jobs
+
